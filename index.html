@@ -20,7 +20,7 @@
 			<div class="container-fluid">
 				<ul class="navbar-nav">
 					<li class="nav-item">
-						<a class="nav-link" href="#resources">Helpful Resources</a>
+						<a class="nav-link" href="#resources">Resources</a>
 					</li>
 					<li class="nav-item">
 						<a class="nav-link" href="#p21-quirks">Quirks</a>
@@ -47,12 +47,36 @@
 					<hr class="d-sm-none" />
 				</div> -->
 				<div class="col-sm-12">
-					<h2 id="resources" class="mt-5">Useful Resources</h2>
+					<h2 id="resources" class="mt-5">Resources</h2>
 					<p>Just a list of resources and what they are good for.</p>
-					<ul class="nav nav-pills flex-row">
-						<li class="nav-item">
-							<a href="https://filezilla-project.org/">FileZilla</a> - Need to FTP?  Look no further.
-						</li>
+					<ul>
+						<!--
+						<h5>category</h5>
+						<li><a href="">link</a> - description</li>
+						-->
+						<h5>API / Network Analysis</h5>
+						<li><a href="https://www.postman.com/">Postman</a> - Test API endpoints, generate code in various languages</li>
+						<li><a href="https://www.telerik.com/fiddler">Fiddler - similar to postman, but also easily captures and logs all network traffic</a></li>
+						<li><a href="https://www.wireshark.org/"></a>Wireshark - Network protocol analyzer, Fiddler++</li>
+						<br/>
+						<h5>Code Editors</h5>
+						<li><a href="https://nimbletext.com/">NimbleText</a> - Easy multi line editor, think SQL</li>
+						<li><a href="http://notepad-plus-plus.org/">Notepad++</a> - honestly, its file protocol switching has saved me a few times</li>
+						<li><a href="https://code.visualstudio.com/">VScode</a> - Much lighter than Visual Studio, a plethora of plugins</li>
+						<li><a href="https://visualstudio.microsoft.com/">Visual Studio</a> - For heavier development - compiled solutions</li>
+						<li><a href="https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms?view=sql-server-ver15">SSMS (SQL Server Management Studio)</a> - if you're working with SQL databases, you should really have this or something like it</li>
+						<br/>
+						<h5>Git</h5>
+						<li><a href="https://git-scm.com/downloads">Git</a> - Versoin Control</li>
+						<li><a href="https://github.com/">Github</a> - host your repos and pages (like this one)</li>
+						<li><a href="https://www.gitkraken.com/">Gitkraken</a> - Git GUI</li>
+						<li><a href="https://www.sourcetreeapp.com/">SourceTree</a> - Another Git GUI</li>
+						<br/>
+						<h5>Misc</h5>
+						<li><a href="https://www.jetbrains.com/decompiler/">dotPeek</a> - .NET dll decompiler</li>
+						<li class="nav-item"><a href="https://filezilla-project.org/">FileZilla</a> - Need to FTP?  Look no further.</li>
+						<br/>
+						<p>More to come...</p>
 					</ul>
 				</div>
 				<div class="col-sm-12">
@@ -95,7 +119,7 @@
 								To find it there is a sql table where these can be looked at via `select * from p21_view_pending_import with(nolock)` or in the 'Edit Pending Import Records' window in P21</li>
 							<li>Additionally: Ensure 'Save import Suspense Files to Database' is set to true in P21 at: System Settings -> Imports/Exports -> General</li>
 							<li>Potential Cause: There might be a dynachange rule or system popup/alert that is preventing it from working</li>
-							<li>Solution: Audit any dynachages / system alerts tied to order submit, disable one by one - perhaps run in debugger with breakpoints and see what variables are in play</li>l
+							<li>Solution: Audit any dynachages / system alerts tied to order submit, disable one by one - perhaps run in debugger with breakpoints and see what variables are in play</li>
 							<br/>
 							<li>Problem: Transaction and Interactive Api calls generally slow.</li>
 							<li>Solution: Could be dynachange rules slowing you down - make a user for your api calls and exclude them from all non-essential dynachange rules that you can.</li>
