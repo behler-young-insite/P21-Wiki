@@ -46,57 +46,31 @@
 					<h2 id="p21-quirks" class="mt-5">P21 Quirks / Known Bugs & Workarounds</h2>
 					<ul class="nav nav-pills flex-row">
 						<li class="nav-item">
-							<a class="nav-link" href="#sample-quirk1">Sample Quirk1</a>
+							<a class="nav-link" href="#api-slowness">Slow API Calls</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="#sample-quirk2">Sample Quirk2</a>
+							<a class="nav-link" href="#sample-quirk">Sample Quirk</a>
 						</li>
 					</ul>
 
-					<h5 id="sample-quirk1">Sample Quirk</h5>
+					<h5 id="api-slowness">Slow API Calls</h5>
 					<p>
-						Sunt in culpa qui officia deserunt mollit anim id est laborum
-						consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-						labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-						exercitation ullamco.
-						Sunt in culpa qui officia deserunt mollit anim id est laborum
-						consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-						labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-						exercitation ullamco.
-						Sunt in culpa qui officia deserunt mollit anim id est laborum
-						consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-						labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-						exercitation ullamco.
-						Sunt in culpa qui officia deserunt mollit anim id est laborum
-						consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-						labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-						exercitation ullamco.
-						Sunt in culpa qui officia deserunt mollit anim id est laborum
-						consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-						labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-						exercitation ullamco.
-						Sunt in culpa qui officia deserunt mollit anim id est laborum
-						consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-						labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-						exercitation ullamco.
-						Sunt in culpa qui officia deserunt mollit anim id est laborum
-						consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-						labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-						exercitation ullamco.
-						Sunt in culpa qui officia deserunt mollit anim id est laborum
-						consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-						labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-						exercitation ullamco.
-						Sunt in culpa qui officia deserunt mollit anim id est laborum
-						consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-						labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-						exercitation ullamco.
+						<ul>
+							<li>Problem: Api calls are Intermittently slow (slow starts) due to P21 Idling.</li>
+							<li>Solution: A look at changing the IIS setting as outlined in <a href="https://docs.hangfire.io/en/latest/deployment-to-production/making-aspnet-app-always-running.html">this link</a>.</li>
+							<li>Solution: A bit hacky, but you could ping the api at an interval to keep it from falling asleep</li>
+							<br/>
+							<li>Problem: Transaction and Interactive Api calls generally slow.</li>
+							<li>Solution: Could be dynachange rules slowing you down - make a user for your api calls and exclude them from all non-essential dynachange rules that you can.</li>
+							<li>Solution: On the website, you could rely on async calls so that the slowness of P21 API is mitigated</li>
+							<li>Solution: If real time is essential and you are on prem with your site and db hosted on same server, you could copy/utilize the P21 stored procedures to get the data you need.</li>
+						</ul>
 					</p>
 					<p>
-					Author: Derek DenHartigh
+					Author: Felipe Maurer transcribed by Derek DenHartigh
 					</p>
 
-					<h5 id="sample-quirk2">Sample Quirk</h5>
+					<h5 id="sample-quirk">Sample Quirk</h5>
 					<p>
 						Sunt in culpa qui officia deserunt mollit anim id est laborum
 						consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
@@ -143,20 +117,23 @@
 					<h2 id="p21-wiki-authors" class="mt-5">List of Authors</h2>
 					<p>Feel free to embellish with an image, company, short descr, social links, etc.</p>
 					<ul class="nav nav-pills flex-column">
-						<li class="nav-item">
-							Bryce Byker
+						<li>
+							Bryce Byker (Behler-Young, Developer - just getting started)
 						</li>
-						<li class="nav-item">
-							Derek DenHartigh
+						<li>
+							Derek DenHartigh (Behler-Young, Developer - just getting started)
+						</li>
+						<li>
+							Felipe Maurer (Hydradyne, Sr. Web Developer - 7+ years working with P21)
 						</li>
 					</ul>
 				</div>
 			</div>
 		</div>
 
-		<div class="mt-5 p-4 bg-dark text-white text-center">
+		<!-- <div class="mt-5 p-4 bg-dark text-white text-center">
 			<p>Footer</p>
-		</div>
+		</div> -->
 		<script src="./main.js"></script>
 	</body>
 </html>
