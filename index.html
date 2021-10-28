@@ -49,7 +49,7 @@
 							<a class="nav-link" href="#api-slowness">Slow API Calls</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="#sample-quirk">Sample Quirk</a>
+							<a class="nav-link" href="#successful-order-creation-no-order-created">Order Creation post returns 200 Success but does not create an order</a>
 						</li>
 					</ul>
 
@@ -70,47 +70,28 @@
 					Author: Felipe Maurer transcribed by Derek DenHartigh
 					</p>
 
-					<h5 id="sample-quirk">Sample Quirk</h5>
+					<h5 id="successful-order-creation-no-order-created">Order Creation post returns 200 Success but does not create an order</h5>
 					<p>
-						Sunt in culpa qui officia deserunt mollit anim id est laborum
-						consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-						labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-						exercitation ullamco.
-						Sunt in culpa qui officia deserunt mollit anim id est laborum
-						consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-						labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-						exercitation ullamco.
-						Sunt in culpa qui officia deserunt mollit anim id est laborum
-						consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-						labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-						exercitation ullamco.
-						Sunt in culpa qui officia deserunt mollit anim id est laborum
-						consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-						labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-						exercitation ullamco.
-						Sunt in culpa qui officia deserunt mollit anim id est laborum
-						consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-						labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-						exercitation ullamco.
-						Sunt in culpa qui officia deserunt mollit anim id est laborum
-						consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-						labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-						exercitation ullamco.
-						Sunt in culpa qui officia deserunt mollit anim id est laborum
-						consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-						labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-						exercitation ullamco.
-						Sunt in culpa qui officia deserunt mollit anim id est laborum
-						consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-						labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-						exercitation ullamco.
-						Sunt in culpa qui officia deserunt mollit anim id est laborum
-						consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-						labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-						exercitation ullamco.
+						<ul>
+							<li>Problem: Epic Care support tells me that an order post should either Fail with a generic message, Fail with a specific message, or Succeed and return the order number of the order Created</li>
+							<li>Potential Cause: All items on the order do not exist in the sale location</li>
+							<li>Solution: try adding an item that does exist at the selected sales location</li>
+							<li>Explanation: if all the items exist, then the order is created fine.
+								If none of the items exist - then the order ends in suspended records.
+								If some of the items exists, and some do not then the order will be imported and the items the don't exist will just be missing from the order there should be a record indicating that items fell off which you will specifically need to look at.
+								To find it there is a sql table where these can be looked at via `select * from p21_view_pending_import with(nolock)` or in the 'Edit Pending Import Records' window in P21</li>
+							<li>Additionally: Ensure 'Save import Suspense Files to Database' is set to true in P21 at: System Settings -> Imports/Exports -> General</li>
+							<li>Potential Cause: There might be a dynachange rule or system popup/alert that is preventing it from working</li>
+							<li>Solution: Audit any dynachages / system alerts tied to order submit, disable one by one - perhaps run in debugger with breakpoints and see what variables are in play</li>l
+							<br/>
+							<li>Problem: Transaction and Interactive Api calls generally slow.</li>
+							<li>Solution: Could be dynachange rules slowing you down - make a user for your api calls and exclude them from all non-essential dynachange rules that you can.</li>
+							<li>Solution: On the website, you could rely on async calls so that the slowness of P21 API is mitigated</li>
+							<li>Solution: If real time is essential and you are on prem with your site and db hosted on same server, you could copy/utilize the P21 stored procedures to get the data you need.</li>
+						</ul>
 					</p>
 					<p>
-					Author: Derek DenHartigh
+					Author: Felipe Maurer transcribed by Derek DenHartigh
 					</p>
 				</div>
 				<div class="col-sm-8">
