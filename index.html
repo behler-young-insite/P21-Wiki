@@ -52,7 +52,7 @@
 					<ul>
 						<!--
 						<h5>category</h5>
-						<li><a href="">link</a> - description</li>
+						<li><a href="">link</a> - description - <a href="./resources/screenshots/screenshotFile">screenshot</a></li>
 						-->
 						<h5>API / Network Analysis</h5>
 						<li><a href="https://www.postman.com/">Postman</a> - Test API endpoints, generate code in various languages</li>
@@ -73,6 +73,8 @@
 						<li><a href="https://www.sourcetreeapp.com/">SourceTree</a> - Another Git GUI - <a href="./resources/screenshots/sourcetree-screenshot.png">screenshot</a></li>
 						<br/>
 						<h5>Misc</h5>
+						<li><a href="https://www.7-zip.org/">7zip</a> - free and open-source file archiver / unzipper</li>
+						<li><a href="https://tweaker.rammichael.com/">7+ Taskbar Tweaker</a> - Windows OS taskbar tweaker - ease of life mod - <a href="./resources/screenshots/taskbar-tweaker.png">screenshot</a></li>
 						<li><a href="https://www.jetbrains.com/decompiler/">dotPeek</a> - .NET dll decompiler</li>
 						<li class="nav-item"><a href="https://filezilla-project.org/">FileZilla</a> - Need to FTP?  Look no further.</li>
 						<br/>
@@ -98,7 +100,7 @@
 							<li>Solution: A bit hacky, but you could ping the api at an interval to keep it from falling asleep</li>
 							<br/>
 							<li>Problem: Transaction and Interactive Api calls generally slow.</li>
-							<li>Solution: Could be dynachange rules slowing you down - make a user for your api calls and exclude them from all non-essential dynachange rules that you can.</li>
+							<li>Solution: Could be Dynachange rules slowing you down - make a user for your api calls and exclude them from all non-essential Dynachange rules that you can.</li>
 							<li>Solution: On the website, you could rely on async calls so that the slowness of P21 API is mitigated</li>
 							<li>Solution: If real time is essential and you are on prem with your site and db hosted on same server, you could copy/utilize the P21 stored procedures to get the data you need.</li>
 						</ul>
@@ -110,7 +112,10 @@
 					<h5 id="successful-order-creation-no-order-created">Order Creation post returns 200 Success but does not create an order</h5>
 					<p>
 						<ul>
-							<li>Problem: Epic Care support tells me that an order post should either Fail with a generic message, Fail with a specific message, or Succeed and return the order number of the order Created</li>
+							<li>Problem: Order creation post succeeds but doesn't create an order; an order post should either Fail with a generic message, Fail with a specific message, or Succeed and return the order number of the order Created</li>
+							<li>Potential Cause: The order submitted exceeds a customers credit limit</li>
+							<li>Explanation: while this should fail and send back a message as to why it failed, that is not the case.  This is a bug which may/may not be fixed and for the meantime will need to be worked around.</li>
+							<br/>
 							<li>Potential Cause: All items on the order do not exist in the sale location</li>
 							<li>Solution: try adding an item that does exist at the selected sales location</li>
 							<li>Explanation: if all the items exist, then the order is created fine.
@@ -118,13 +123,8 @@
 								If some of the items exists, and some do not then the order will be imported and the items the don't exist will just be missing from the order there should be a record indicating that items fell off which you will specifically need to look at.
 								To find it there is a sql table where these can be looked at via `select * from p21_view_pending_import with(nolock)` or in the 'Edit Pending Import Records' window in P21</li>
 							<li>Additionally: Ensure 'Save import Suspense Files to Database' is set to true in P21 at: System Settings -> Imports/Exports -> General</li>
-							<li>Potential Cause: There might be a dynachange rule or system popup/alert that is preventing it from working</li>
+							<li>Potential Cause: There might be a Dynachange rule or system popup/alert that is preventing it from working</li>
 							<li>Solution: Audit any dynachages / system alerts tied to order submit, disable one by one - perhaps run in debugger with breakpoints and see what variables are in play</li>
-							<br/>
-							<li>Problem: Transaction and Interactive Api calls generally slow.</li>
-							<li>Solution: Could be dynachange rules slowing you down - make a user for your api calls and exclude them from all non-essential dynachange rules that you can.</li>
-							<li>Solution: On the website, you could rely on async calls so that the slowness of P21 API is mitigated</li>
-							<li>Solution: If real time is essential and you are on prem with your site and db hosted on same server, you could copy/utilize the P21 stored procedures to get the data you need.</li>
 						</ul>
 					</p>
 					<p>
