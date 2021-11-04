@@ -90,6 +90,9 @@
 						<li class="nav-item">
 							<a class="nav-link" href="#successful-order-creation-no-order-created">Order Creation post returns 200 Success but does not create an order</a>
 						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="#create-muliple-order-lines-of-identical-products">How to Create Multiple order lines of identical products</a>
+						</li>
 					</ul>
 
 					<h5 id="api-slowness">Slow API Calls</h5>
@@ -114,6 +117,7 @@
 						<ul>
 							<li>Problem: Order creation post succeeds but doesn't create an order; an order post should either Fail with a generic message, Fail with a specific message, or Succeed and return the order number of the order Created</li>
 							<li>Potential Cause: The order submitted exceeds a customers credit limit</li>
+							<li>Solution: Raise the customer's credit limit</li>
 							<li>Explanation: while this should fail and send back a message as to why it failed, that is not the case.  This is a bug which may/may not be fixed and for the meantime will need to be worked around.</li>
 							<br/>
 							<li>Potential Cause: All items on the order do not exist in the sale location</li>
@@ -125,6 +129,21 @@
 							<li>Additionally: Ensure 'Save import Suspense Files to Database' is set to true in P21 at: System Settings -> Imports/Exports -> General</li>
 							<li>Potential Cause: There might be a Dynachange rule or system popup/alert that is preventing it from working</li>
 							<li>Solution: Audit any dynachages / system alerts tied to order submit, disable one by one - perhaps run in debugger with breakpoints and see what variables are in play</li>
+						</ul>
+					</p>
+					<p>
+					Author: Felipe Maurer & Derek DenHartigh
+					</p>
+
+					<h5 id="create-muliple-order-lines-of-identical-products">How to Create Multiple order lines of identical products</h5>
+					<p>
+						<ul>
+							<li>Problem: Need to create an order with multiple order lines with variable qty</li>
+						 	<li>Solution: give products alt part numbers and submit the identical item lines under alternate part numbers</li>
+							<li>Explanation: The P21 API (transaction & interactive endpoints) will accept alternate part numbers as item id's and do the conversion on the fly when creating the order.
+								You can send orders to the API using the alternate part number in place of the item id the API doesn't mind it will automatically convert the item to the part number but oddly enough in this instance it 'skips' the 'merging'
+								so if you sent something like alt1 qty: 20, alt1 qty = 10 in one api call the api would turn that into an order with two lines for the same item id with different quantities</li>
+							<li>Warning: This most definitely seems like a hack, so if Epicor ever fixes it, the solution may no longer be viable</li>
 						</ul>
 					</p>
 					<p>
