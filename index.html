@@ -82,6 +82,65 @@
 					</ul>
 				</div>
 				<div class="col-sm-12">
+					<h2 id="p21-quirks" class="mt-5">Business Rules - How To</h2>
+					<ul class="nav nav-pills flex-row">
+						<li class="nav-item">
+							<a class="nav-link" href="#suppress-pop-ups">Suppress Pop-Ups</a>
+						</li>
+					</ul>
+
+					<h5 id="suppress-pop-ups">Suppress Pop-Ups</h5>
+					<p>
+						<ul>
+							<li>Problem: Cannot do certain things via non-interactive api due to pop-ups</li>
+							<li>Solution: Suppress the pop-up by creating a business rule to default it</li>
+							<li>Solution:
+								<ol>
+									<li>RMB --> DynaChange rule --> listen for new rule --> trigger pop-up</li>
+									<li>DynaChange window opens for rule configuration</li>
+									<li>Configured rule applies to <strong>ALL</strong> popup events (select * from p21_view_messages m(nolock)) to see all the popup messages</li>
+									<li>in order to target your business logic, a series of if/thens are required</li>
+									<ol>
+										<li>if message_no == _____ (specific popup number) - cannot rely on user_text, not a 1:1 match due to dynamic content</li>
+										<li>set default_button to what I want it to select (e.g. override price anyway? Yes)</li>
+										<li>set suppress_message to Y so that default is used</li>
+										<li>consider restricting this rule to api user unless you want to suppress the popup for everyone</li>
+										<pre><code>
+	public override RuleResult Execute()
+	{
+		RuleResult Result = new RuleResult();
+		try
+		{
+			DataTable msgbox_info;
+			msgbox_info = Data.Set.Tables["MessageBoxData"];
+			if (msgbox_info.Rows[0]["message_no"].ToString() == 8333.ToString())
+			{
+				msgbox_info.Rows[0]["default_button"] = "1";
+				msgbox_info.Rows[0]["suppress_message"] = "Y"; // Can set this to Y to suppress message box. Default button
+				automatically used.
+			}
+			Result.Success = true;
+		}
+		
+		catch (Exception ex)
+		{
+			Result.Message = ex.Message;
+			Result.Success = false;
+		}
+		
+		return Result;
+	}
+									</code></pre>
+									</ol>
+								</ol>
+							</li>
+						</ul>
+					</p>
+					<p>
+					Author: Felipe Maurer transcribed by Derek DenHartigh
+					</p>
+				</div>
+				<div class="col-sm-12">
 					<h2 id="p21-quirks" class="mt-5">P21 Quirks / Known Bugs & Workarounds</h2>
 					<ul class="nav nav-pills flex-row">
 						<li class="nav-item">
